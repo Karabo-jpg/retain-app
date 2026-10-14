@@ -2,8 +2,8 @@
 
 Retain is a full-stack web app for tracking personal expenses and monthly budgets, built as a summative project for the React Development course.
 
-**Live app:** TBD (added after deployment)
-**API base URL:** TBD (added after deployment)
+**Live app:** https://retain-app-frontend-lac.vercel.app
+**API base URL:** https://retain-app.vercel.app/api
 
 ## Tech Stack
 
@@ -68,8 +68,10 @@ This repo deploys as **two separate Vercel projects**, both pointing at the same
 
 1. **Backend project** — Root Directory: `backend`. Add the [Supabase integration](https://vercel.com/integrations/supabase) in the Vercel dashboard and connect it to the `retain-app` Supabase project; this auto-injects `POSTGRES_PRISMA_URL` (pooled) and `POSTGRES_URL_NON_POOLING` (direct), which the backend reads automatically as fallbacks for `DATABASE_URL`/`DIRECT_URL` (see `src/config/env.ts`) — no database password is ever typed into Vercel manually. Also set `JWT_SECRET` and `CLIENT_URL` (the frontend project's URL, once known) as env vars. The backend runs as a Vercel serverless function (`api/index.ts` wraps the Express app).
 2. **Frontend project** — Root Directory: `frontend`. Set `VITE_API_BASE_URL` to the backend project's URL + `/api`.
-3. After both are deployed, update the backend's `CLIENT_URL` env var to the frontend's final URL (for CORS) and redeploy.
+3. After both are deployed, update the backend's `CLIENT_URL` env var to the frontend's exact final URL (for CORS) and the frontend's `VITE_API_BASE_URL` to `<backend-url>/api` (**must** include the `/api` suffix — the backend only mounts routes under `/api`), then redeploy both.
 4. Run `npx prisma migrate deploy` (or apply the SQL in `prisma/migrations/0_init`) and `npm run seed` once against the Supabase database to create tables and the starter categories/admin user — this was already done directly against Supabase for this project via the Supabase MCP tooling during development.
+5. **Important:** append `?pgbouncer=true` to the pooled `DATABASE_URL` (port 6543) if it isn't already present. Without it, Prisma's prepared statements intermittently fail against Supabase's transaction-mode PgBouncer pooler with `prepared statement "sN" does not exist`. The non-pooled `DIRECT_URL` (port 5432) does not need this flag.
+6. Because `VITE_API_BASE_URL` is inlined at build time (not read at runtime), changing it requires a full redeploy of the frontend project, not just a restart.
 
 ## API Reference
 
