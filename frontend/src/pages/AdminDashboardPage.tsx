@@ -2,6 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { AdminNavTabs } from "../components/admin/AdminNavTabs";
 import { PlatformStatsCards } from "../components/admin/PlatformStatsCards";
+import { RecentUsersList } from "../components/admin/RecentUsersList";
 import { TopBottomCategoriesList } from "../components/admin/TopBottomCategoriesList";
 import { ErrorAlert } from "../components/common/ErrorAlert";
 import { LoadingSpinner } from "../components/common/LoadingSpinner";
@@ -47,6 +48,11 @@ function AdminInsightsContent({ insights }: { insights: AdminInsights }): JSX.El
         </Grid>
         <Grid item xs={12} md={5}>
           <RecentExpensesList expenses={insights.recentExpenses} />
+        </Grid>
+      </Grid>
+      <Grid container spacing={2} mb={3}>
+        <Grid item xs={12}>
+          <RecentUsersList users={insights.recentUsers} />
         </Grid>
       </Grid>
       <TopBottomCategoriesList top={insights.topCategories} bottom={insights.bottomCategories} />
