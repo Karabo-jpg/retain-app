@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, InputAdornment, TextField } from "@mui/material";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -43,6 +43,7 @@ export function BudgetForm({ currentAmount, onSubmit }: BudgetFormProps): JSX.El
         label="Monthly Budget"
         type="number"
         inputProps={{ step: "0.01" }}
+        InputProps={{ startAdornment: <InputAdornment position="start">UGX</InputAdornment> }}
         {...register("amount")}
         error={!!errors.amount}
         helperText={errors.amount?.message}

@@ -6,6 +6,7 @@ import { PageContainer } from "../components/common/PageContainer";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { fetchBudget, upsertBudgetThunk } from "../store/slices/budgetSlice";
 import { fetchDashboard } from "../store/slices/dashboardSlice";
+import { formatCurrency } from "../utils/currency";
 
 export function BudgetPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -40,14 +41,14 @@ export function BudgetPage(): JSX.Element {
               <Typography variant="body2" color="text.secondary">
                 Total Spent
               </Typography>
-              <Typography variant="h6">${dashboard.totalSpent.toFixed(2)}</Typography>
+              <Typography variant="h6">{formatCurrency(dashboard.totalSpent)}</Typography>
             </Box>
             <Box>
               <Typography variant="body2" color="text.secondary">
                 Remaining
               </Typography>
               <Typography variant="h6">
-                {dashboard.remainingBudget !== null ? `$${dashboard.remainingBudget.toFixed(2)}` : "—"}
+                {dashboard.remainingBudget !== null ? formatCurrency(dashboard.remainingBudget) : "—"}
               </Typography>
             </Box>
             <BudgetStatusBadge status={dashboard.budgetStatus} />

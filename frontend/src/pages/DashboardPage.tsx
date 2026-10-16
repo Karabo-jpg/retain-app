@@ -8,6 +8,7 @@ import { RecentExpensesList } from "../components/dashboard/RecentExpensesList";
 import { SummaryCard } from "../components/dashboard/SummaryCard";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { fetchDashboard } from "../store/slices/dashboardSlice";
+import { formatCurrency } from "../utils/currency";
 
 export function DashboardPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -28,18 +29,18 @@ export function DashboardPage(): JSX.Element {
       </Typography>
       <Grid container spacing={2} mb={3}>
         <Grid item xs={12} sm={6} md={3}>
-          <SummaryCard label="Total Spent" value={`$${data.totalSpent.toFixed(2)}`} />
+          <SummaryCard label="Total Spent" value={formatCurrency(data.totalSpent)} />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <SummaryCard
             label="Remaining Budget"
-            value={data.remainingBudget !== null ? `$${data.remainingBudget.toFixed(2)}` : "No budget set"}
+            value={data.remainingBudget !== null ? formatCurrency(data.remainingBudget) : "No budget set"}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <SummaryCard
             label="Highest Expense"
-            value={data.highestExpense ? `$${data.highestExpense.amount.toFixed(2)}` : "—"}
+            value={data.highestExpense ? formatCurrency(data.highestExpense.amount) : "—"}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>

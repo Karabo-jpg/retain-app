@@ -1,12 +1,13 @@
 import { Grid } from "@mui/material";
 import { SummaryCard } from "../dashboard/SummaryCard";
 import type { AdminInsights } from "../../types/models";
+import { formatCurrency } from "../../utils/currency";
 
 export function PlatformStatsCards({ insights }: { insights: AdminInsights }): JSX.Element {
   const cards = [
     { label: "Total Users", value: String(insights.totalUsers) },
     { label: "Total Expenses", value: String(insights.totalExpenses) },
-    { label: "Total Expense Value", value: `$${insights.totalExpenseValue.toFixed(2)}` },
+    { label: "Total Expense Value", value: formatCurrency(insights.totalExpenseValue) },
     { label: "Expenses This Month", value: String(insights.expensesThisMonth) },
   ];
 

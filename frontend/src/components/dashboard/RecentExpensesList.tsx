@@ -1,5 +1,6 @@
 import { List, ListItem, ListItemText, Paper, Typography } from "@mui/material";
 import type { Expense } from "../../types/models";
+import { formatCurrency } from "../../utils/currency";
 
 export function RecentExpensesList({ expenses }: { expenses: Expense[] }): JSX.Element {
   return (
@@ -19,7 +20,7 @@ export function RecentExpensesList({ expenses }: { expenses: Expense[] }): JSX.E
               primary={expense.title}
               secondary={`${expense.category.name} · ${new Date(expense.date).toLocaleDateString()}`}
             />
-            <Typography variant="body2">${expense.amount.toFixed(2)}</Typography>
+            <Typography variant="body2">{formatCurrency(expense.amount)}</Typography>
           </ListItem>
         ))}
       </List>

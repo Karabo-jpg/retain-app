@@ -14,6 +14,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setPage, setPageSize } from "../../store/slices/expensesSlice";
 import type { Expense } from "../../types/models";
+import { formatCurrency } from "../../utils/currency";
 
 interface ExpenseTableProps {
   onEdit: (expense: Expense) => void;
@@ -45,7 +46,7 @@ export function ExpenseTable({ onEdit, onDelete }: ExpenseTableProps): JSX.Eleme
                 <TableCell>{expense.category.name}</TableCell>
                 <TableCell>{expense.paymentMethod.replace("_", " ")}</TableCell>
                 <TableCell>{new Date(expense.date).toLocaleDateString()}</TableCell>
-                <TableCell align="right">${expense.amount.toFixed(2)}</TableCell>
+                <TableCell align="right">{formatCurrency(expense.amount)}</TableCell>
                 <TableCell align="right">
                   <IconButton size="small" onClick={() => onEdit(expense)} aria-label="edit">
                     <EditIcon fontSize="small" />

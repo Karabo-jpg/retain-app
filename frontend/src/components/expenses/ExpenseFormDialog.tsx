@@ -6,6 +6,7 @@ import {
   DialogContent,
   DialogTitle,
   Grid,
+  InputAdornment,
   MenuItem,
   TextField,
 } from "@mui/material";
@@ -96,6 +97,7 @@ export function ExpenseFormDialog({ open, initialValue, onClose, onSubmit }: Exp
               type="number"
               fullWidth
               inputProps={{ step: "0.01" }}
+              InputProps={{ startAdornment: <InputAdornment position="start">UGX</InputAdornment> }}
               {...register("amount")}
               error={!!errors.amount}
               helperText={errors.amount?.message}

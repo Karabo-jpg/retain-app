@@ -1,6 +1,7 @@
 import { Paper, Typography } from "@mui/material";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import type { CategorySpending } from "../../types/models";
+import { formatCurrency } from "../../utils/currency";
 
 export function CategoryBreakdownChart({ data }: { data: CategorySpending[] }): JSX.Element {
   return (
@@ -13,7 +14,7 @@ export function CategoryBreakdownChart({ data }: { data: CategorySpending[] }): 
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="categoryName" tick={{ fontSize: 12 }} />
           <YAxis tick={{ fontSize: 12 }} />
-          <Tooltip formatter={(value: number) => `$${value.toFixed(2)}`} />
+          <Tooltip formatter={(value: number) => formatCurrency(value)} />
           <Bar dataKey="total" fill="#1e3a8a" radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>

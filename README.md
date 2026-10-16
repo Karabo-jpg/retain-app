@@ -22,6 +22,7 @@ Retain is a full-stack web app for tracking personal expenses and monthly budget
 - User dashboard: total spending for the month, remaining budget, highest individual expense, spending by category (chart), recent expenses.
 - Admin dashboard (admin role only, Context-protected): create/update/delete expense categories (deleting a category reassigns its expenses to a protected "Uncategorized" category); platform insights — total users, total expenses, total expense value, expenses this month, spending per category, top 5 / bottom 5 most-used categories (by expense count), recently added expenses, recently registered users.
 - Responsive layout (mobile/tablet/desktop) built with MUI's Grid and breakpoints.
+- All monetary amounts are displayed in Ugandan Shillings (UGX).
 
 ## Project Structure
 
@@ -55,12 +56,14 @@ npm run dev             # starts the app on http://localhost:5173
 
 ### Grader / Demo Login
 
-An admin account is seeded automatically:
+An admin account is seeded automatically, and a regular user account already exists with sample expense/budget data for demo purposes:
 
-- **Email:** `admin@retain.app`
-- **Password:** `Admin123!`
+| Role | Email | Password |
+|---|---|---|
+| Admin | `admin@retain.app` | `Admin123!` |
+| Regular user | `testuser1@example.com` | `TestPass123!` |
 
-Sign up for a separate regular-user account to test the non-admin experience.
+You can also sign up your own account to test the non-admin experience from scratch.
 
 ## Deployment (Vercel + Supabase)
 
